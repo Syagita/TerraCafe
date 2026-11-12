@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Terra Café - Discover delicious food, sweet desserts, and refreshing drinks.">
+
+    <title>Terra Café</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo">Terra Café</div>
+        <p>Good Food, Good Mood</p>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <a href="#makanan">Makanan</a>
+        <a href="#dessert">Dessert</a>
+        <a href="#minuman">Minuman</a>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main>
+
+        <!-- WELCOME -->
+        <section class="welcome">
+            <h1>Welcome to Terra Café</h1>
+            <p>Discover delicious food, sweet desserts, and refreshing drinks.</p>
+        </section>
+
+        <!-- SEARCH -->
+        <div class="search-box">
+            <input
+                type="text"
+                id="search"
+                placeholder="Cari menu favoritmu..."
+                aria-label="Cari menu"
+            >
+        </div>
+
+        <!-- PESAN JIKA MENU TIDAK DITEMUKAN -->
+        <p id="no-result">
+            Menu tidak ditemukan.
+        </p>
+
+        <!-- MAKANAN -->
+        <section class="menu-section" id="makanan">
+            <h2>Makanan</h2>
+
+            <div class="menu-container">
+
+                <div class="menu-card" data-category="makanan">
+                    <div class="food-icon">
+                        <img src="images/chicken-alfredo.jpg" alt="Chicken Alfredo Pasta">
+                    </div>
+                    <h3>Chicken Alfredo Pasta</h3>
+                    <p>Rp25.000</p>
+                </div>
+
+                <div class="menu-card" data-category="makanan">
+                    <div class="food-icon">
+                        <img src="images/beef-bowl.jpg" alt="Japanese Beef Bowl">
+                    </div>
+                    <h3>Japanese Beef Bowl</h3>
+                    <p>Rp45.000</p>
+                </div>
+
+                <div class="menu-card" data-category="makanan">
+                    <div class="food-icon">
+                        <img src="images/smoked-beef-croissant.jpg" alt="Smoked Beef Croissant">
+                    </div>
+                    <h3>Smoked Beef Croissant</h3>
+                    <p>Rp18.000</p>
+                </div>
+
+                <div class="menu-card" data-category="makanan">
+                    <div class="food-icon">
+                        <img src="images/chicken-katsu.jpg" alt="Chicken Katsu Curry">
+                    </div>
+                    <h3>Chicken Katsu Curry</h3>
+                    <p>Rp25.000</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- DESSERT -->
+        <section class="menu-section" id="dessert">
+            <h2>Dessert</h2>
+
+            <div class="menu-container">
+
+                <div class="menu-card" data-category="dessert">
+                    <div class="food-icon">
+                        <img src="images/strawberry-shortcake.jpg" alt="Strawberry Shortcake Cup">
+                    </div>
+                    <h3>Strawberry Shortcake Cup</h3>
+                    <p>Rp15.000</p>
+                </div>
+
+                <div class="menu-card" data-category="dessert">
+                    <div class="food-icon">
+                        <img src="images/tiramisu.jpg" alt="Classic Tiramisu">
+                    </div>
+                    <h3>Classic Tiramisu</h3>
+                    <p>Rp18.000</p>
+                </div>
+
+                <div class="menu-card" data-category="dessert">
+                    <div class="food-icon">
+                        <img src="images/basque-cheesecake.jpg" alt="Basque Cheesecake">
+                    </div>
+                    <h3>Basque Cheesecake</h3>
+                    <p>Rp12.000</p>
+                </div>
+
+                <div class="menu-card" data-category="dessert">
+                    <div class="food-icon">
+                        <img src="images/french-choux.jpg" alt="French Choux">
+                    </div>
+                    <h3>French Choux</h3>
+                    <p>Rp18.000</p>
+                </div>
+
+                <div class="menu-card" data-category="dessert">
+                    <div class="food-icon">
+                        <img src="images/panna-cotta.jpg" alt="Panna Cotta">
+                    </div>
+                    <h3>Panna Cotta</h3>
+                    <p>Rp18.000</p>
+                </div>
+
+                <div class="menu-card" data-category="dessert">
+                    <div class="food-icon">
+                        <img src="images/matcha-opera.jpg" alt="Matcha Opera Cake">
+                    </div>
+                    <h3>Matcha Opera Cake</h3>
+                    <p>Rp22.000</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- MINUMAN -->
+        <section class="menu-section" id="minuman">
+            <h2>Minuman</h2>
+
+            <div class="menu-container">
+
+                <div class="menu-card" data-category="minuman">
+                    <div class="food-icon">
+                        <img src="images/strawberry-matcha.jpg" alt="Strawberry Matcha Latte">
+                    </div>
+                    <h3>Strawberry Matcha Latte</h3>
+                    <p>Rp20.000</p>
+                </div>
+
+                <div class="menu-card" data-category="minuman">
+                    <div class="food-icon">
+                        <img src="images/blue-ocean.jpg" alt="Blue Ocean Sparkling">
+                    </div>
+                    <h3>Blue Ocean Sparkling</h3>
+                    <p>Rp12.000</p>
+                </div>
+
+                <div class="menu-card" data-category="minuman">
+                    <div class="food-icon">
+                        <img src="images/rose-lychee.jpg" alt="Rose Lychee Tea">
+                    </div>
+                    <h3>Rose Lychee Tea</h3>
+                    <p>Rp12.000</p>
+                </div>
+
+                <div class="menu-card" data-category="minuman">
+                    <div class="food-icon">
+                        <img src="images/spanish-latte.jpg" alt="Spanish Latte">
+                    </div>
+                    <h3>Spanish Latte</h3>
+                    <p>Rp15.000</p>
+                </div>
+
+                <div class="menu-card" data-category="minuman">
+                    <div class="food-icon">
+                        <img src="images/mango-sunrise.jpg" alt="Mango Sunrise">
+                    </div>
+                    <h3>Mango Sunrise</h3>
+                    <p>Rp15.000</p>
+                </div>
+
+                <div class="menu-card" data-category="minuman">
+                    <div class="food-icon">
+                        <img src="images/lavender-lemonade.jpg" alt="Lavender Lemonade">
+                    </div>
+                    <h3>Lavender Lemonade</h3>
+                    <p>Rp12.000</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 Terra Café</p>
+        <p>Thank you for visiting!</p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script src="script.js"></script>
+
+</body>
+</html>
