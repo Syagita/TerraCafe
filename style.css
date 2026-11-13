@@ -103,6 +103,51 @@ header p {
     box-shadow: 0 0 5px #b7c4ae;
 }
 
+/* CATEGORY FILTER */
+.category-filter {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 0 auto 45px;
+    padding: 0 20px;
+}
+
+.filter-btn {
+    padding: 10px 22px;
+    border: 1px solid #344c3b;
+    border-radius: 25px;
+    background-color: #fffdf8;
+    color: #344c3b;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.filter-btn:hover {
+    background-color: #d9dfd2;
+}
+
+.filter-btn.active {
+    background-color: #344c3b;
+    color: #fffaf0;
+}
+
+/* RESPONSIVE FILTER */
+@media (max-width: 500px) {
+
+    .category-filter {
+        gap: 8px;
+    }
+
+    .filter-btn {
+        padding: 9px 16px;
+        font-size: 12px;
+    }
+
+}
+
 /* NO RESULT */
 #no-result {
     display: none;
