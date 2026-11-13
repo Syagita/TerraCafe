@@ -409,3 +409,27 @@ footer p + p {
     }
 
 }
+
+/* CHECKOUT BUTTON */
+.checkout-btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 25px;
+    border: none;
+    border-radius: 25px;
+    background-color: #344c3b;
+    color: #fffaf0;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.checkout-btn:hover {
+    background-color: #71876b;
+    transform: translateY(-2px);
+}
+
+.checkout-btn:active {
+    transform: scale(0.98);
+}
