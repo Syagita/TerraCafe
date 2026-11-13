@@ -1,43 +1,59 @@
-// MENGAMBIL ELEMEN SEARCH
+// ===================================
+// 1. MENGAMBIL ELEMEN HTML
+// ===================================
+
 const searchInput = document.getElementById("search");
 
-// MENGAMBIL SEMUA KARTU MENU
 const menuCards = document.querySelectorAll(".menu-card");
 
-// MENGAMBIL SEMUA TOMBOL FILTER
 const filterButtons = document.querySelectorAll(".filter-btn");
 
-// MENGAMBIL PESAN MENU TIDAK DITEMUKAN
 const noResult = document.getElementById("no-result");
 
-// KATEGORI AKTIF
+const cartItems = document.getElementById("cart-items");
+
+const cartTotal = document.getElementById("cart-total");
+
+
+// ===================================
+// 2. VARIABEL KATEGORI
+// ===================================
+
 let activeCategory = "all";
 
-// FUNGSI FILTER MENU
+
+// ===================================
+// 3. DATA KERANJANG
+// ===================================
+
+let cart = [];
+
+
+// ===================================
+// 4. FUNGSI PENCARIAN DAN FILTER
+// ===================================
+
 function filterMenu() {
 
     const searchValue = searchInput.value.toLowerCase().trim();
 
     let found = 0;
 
-    // MEMERIKSA SETIAP KARTU MENU
     menuCards.forEach(function(card) {
 
         const menuName = card.querySelector("h3").textContent.toLowerCase();
 
         const category = card.dataset.category;
 
-        // MEMERIKSA KATEGORI
         const categoryMatch =
             activeCategory === "all" || category === activeCategory;
 
-        // MEMERIKSA PENCARIAN
         const searchMatch = menuName.includes(searchValue);
 
-        // MENAMPILKAN MENU YANG SESUAI
         if (categoryMatch && searchMatch) {
 
             card.style.display = "flex";
+
             found++;
 
         } else {
@@ -48,44 +64,279 @@ function filterMenu() {
 
     });
 
-    // MENYEMBUNYIKAN BAGIAN KATEGORI YANG KOSONG
+    // Menyembunyikan kategori yang kosong
+
     document.querySelectorAll(".menu-section").forEach(function(section) {
 
-        const visibleCards = section.querySelectorAll(
-            '.menu-card[style*="display: flex"]'
-        );
+        const visibleCards = Array.from(
+            section.querySelectorAll(".menu-card")
+        ).filter(function(card) {
 
-        section.style.display = visibleCards.length > 0 ? "block" : "none";
+            return card.style.display !== "none";
+
+        });
+
+        section.style.display =
+            visibleCards.length > 0 ? "block" : "none";
 
     });
 
-    // MENAMPILKAN PESAN JIKA MENU TIDAK DITEMUKAN
-    noResult.style.display = found === 0 ? "block" : "none";
+    // Pesan jika menu tidak ditemukan
+
+    noResult.style.display =
+        found === 0 ? "block" : "none";
 
 }
 
-// EVENT PENCARIAN
+
+// ===================================
+// 5. EVENT SEARCH
+// ===================================
+
 searchInput.addEventListener("input", filterMenu);
 
-// EVENT TOMBOL FILTER
+
+// ===================================
+// 6. EVENT FILTER KATEGORI
+// ===================================
+
 filterButtons.forEach(function(button) {
 
     button.addEventListener("click", function() {
 
-        // MENGHAPUS STATUS ACTIVE
         filterButtons.forEach(function(btn) {
+
             btn.classList.remove("active");
+
         });
 
-        // MEMBERIKAN STATUS ACTIVE
         button.classList.add("active");
 
-        // MENGUBAH KATEGORI AKTIF
         activeCategory = button.dataset.filter;
 
-        // MENJALANKAN FILTER
         filterMenu();
 
     });
 
 });
+
+
+// ===================================
+// 7. MENAMBAHKAN TOMBOL KE SETIAP MENU
+// ===================================
+
+menuCards.forEach(function(card) {
+
+    const button = document.createElement("button");
+
+    button.textContent = "Tambah ke Keranjang";
+
+    button.classList.add("add-cart-btn");
+
+    button.addEventListener("click", function() {
+
+        const name = card.querySelector("h3").textContent;
+
+        const priceText = card.querySelector("p").textContent;
+
+        const price = Number(priceText.replace(/[^\d]/g, ""));
+
+        addToCart(name, price);
+
+    });
+
+    card.appendChild(button);
+
+});
+
+
+// ===================================
+// 8. FUNGSI TAMBAH KE KERANJANG
+// ===================================
+
+function addToCart(name, price) {
+
+    const existingItem = cart.find(function(item) {
+
+        return item.name === name;
+
+    });
+
+    if (existingItem) {
+
+        existingItem.quantity++;
+
+    } else {
+
+        cart.push({
+
+            name: name,
+
+            price: price,
+
+            quantity: 1
+
+        });
+
+    }
+
+    renderCart();
+
+}
+
+
+// ===================================
+// 9. MENAMPILKAN KERANJANG
+// ===================================
+
+function renderCart() {
+
+    cartItems.innerHTML = "";
+
+    if (cart.length === 0) {
+
+        cartItems.innerHTML = `
+            <p class="empty-cart">
+                Keranjang kamu masih kosong.
+            </p>
+        `;
+
+    }
+
+    let total = 0;
+
+    cart.forEach(function(item, index) {
+
+        const subtotal = item.price * item.quantity;
+
+        total += subtotal;
+
+        const cartItem = document.createElement("div");
+
+        cartItem.classList.add("cart-item");
+
+        const itemInfo = document.createElement("div");
+
+        const itemName = document.createElement("h4");
+
+        itemName.textContent = item.name;
+
+        const itemPrice = document.createElement("p");
+
+        itemPrice.textContent =
+            "Rp" + subtotal.toLocaleString("id-ID");
+
+        itemInfo.appendChild(itemName);
+
+        itemInfo.appendChild(itemPrice);
+
+
+        // TOMBOL JUMLAH PESANAN
+
+        const controls = document.createElement("div");
+
+        controls.classList.add("cart-controls");
+
+        const minusButton = document.createElement("button");
+
+        minusButton.textContent = "-";
+
+        minusButton.addEventListener("click", function() {
+
+            changeQuantity(index, -1);
+
+        });
+
+
+        const quantity = document.createElement("span");
+
+        quantity.textContent = item.quantity;
+
+
+        const plusButton = document.createElement("button");
+
+        plusButton.textContent = "+";
+
+        plusButton.addEventListener("click", function() {
+
+            changeQuantity(index, 1);
+
+        });
+
+
+        const removeButton = document.createElement("button");
+
+        removeButton.textContent = "×";
+
+        removeButton.classList.add("remove-btn");
+
+        removeButton.addEventListener("click", function() {
+
+            removeItem(index);
+
+        });
+
+
+        controls.appendChild(minusButton);
+
+        controls.appendChild(quantity);
+
+        controls.appendChild(plusButton);
+
+        controls.appendChild(removeButton);
+
+
+        cartItem.appendChild(itemInfo);
+
+        cartItem.appendChild(controls);
+
+        cartItems.appendChild(cartItem);
+
+    });
+
+
+    // MENAMPILKAN TOTAL HARGA
+
+    cartTotal.textContent =
+        "Rp" + total.toLocaleString("id-ID");
+
+}
+
+
+// ===================================
+// 10. MENGUBAH JUMLAH PESANAN
+// ===================================
+
+function changeQuantity(index, amount) {
+
+    cart[index].quantity += amount;
+
+    if (cart[index].quantity <= 0) {
+
+        cart.splice(index, 1);
+
+    }
+
+    renderCart();
+
+}
+
+
+// ===================================
+// 11. MENGHAPUS MENU
+// ===================================
+
+function removeItem(index) {
+
+    cart.splice(index, 1);
+
+    renderCart();
+
+}
+
+
+// ===================================
+// 12. MENAMPILKAN KERANJANG AWAL
+// ===================================
+
+renderCart();
