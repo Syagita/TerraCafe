@@ -340,3 +340,58 @@ function removeItem(index) {
 // ===================================
 
 renderCart();
+
+// ===================================
+// 13. CHECKOUT VIA WHATSAPP
+// ===================================
+
+// NOMOR WHATSAPP ADMIN
+const adminPhone = "6285113702125";
+
+// MENGAMBIL TOMBOL CHECKOUT
+const checkoutButton = document.getElementById("checkout-btn");
+
+// EVENT KLIK CHECKOUT
+checkoutButton.addEventListener("click", function() {
+
+    // MEMERIKSA APAKAH KERANJANG KOSONG
+    if (cart.length === 0) {
+
+        alert("Keranjang kamu masih kosong!");
+
+        return;
+
+    }
+
+    // MEMBUAT DAFTAR PESANAN
+    let message = "Halo Terra Café! Saya ingin memesan:\n\n";
+
+    let total = 0;
+
+    cart.forEach(function(item, index) {
+
+        const subtotal = item.price * item.quantity;
+
+        total += subtotal;
+
+        message +=
+            `${index + 1}. ${item.name}\n` +
+            `   Jumlah: ${item.quantity}\n` +
+            `   Harga: Rp${subtotal.toLocaleString("id-ID")}\n\n`;
+
+    });
+
+    // MENAMBAHKAN TOTAL HARGA
+    message +=
+        `Total Pesanan: Rp${total.toLocaleString("id-ID")}\n\n`;
+
+    message += "Terima kasih!";
+
+    // MEMBUAT LINK WHATSAPP
+    const whatsappURL =
+        `https://wa.me/${adminPhone}?text=${encodeURIComponent(message)}`;
+
+    // MEMBUKA WHATSAPP
+    window.open(whatsappURL, "_blank");
+
+});
